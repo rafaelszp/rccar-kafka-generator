@@ -1,0 +1,117 @@
+[
+  {
+    "type": "record",
+    "name": "Part",
+    "namespace": "szp.rafael.rccar.dto",
+    "fields": [
+      {
+        "name": "sku",
+        "type": "string"
+      },
+      {
+        "name": "partName",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "Body",
+    "namespace": "szp.rafael.rccar.dto",
+    "fields": [
+      {
+        "name": "part",
+        "type": "Part"
+      },
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "color",
+        "type": "string"
+      },
+      {
+        "name": "material",
+        "type": "string"
+      },
+      {
+        "name": "weight",
+        "type": "float"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "Engine",
+    "namespace": "szp.rafael.rccar.dto",
+    "fields": [
+      {
+        "name": "part",
+        "type": "Part"
+      },
+      {
+        "name": "id",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "RemoteControl",
+    "namespace": "szp.rafael.rccar.dto",
+    "fields": [
+      {
+        "name": "part",
+        "type": "Part"
+      },
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "channelFrequency",
+        "type": {
+          "name": "ChannelFrequencyType",
+          "type": "enum",
+          "symbols": [
+            "RF_27",
+            "RF_49",
+            "RF_50",
+            "RF_53",
+            "RF_72",
+            "RF_75"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "Wheel",
+    "namespace": "szp.rafael.rccar.dto",
+    "fields": [
+      {
+        "name": "part",
+        "type": "Part"
+      },
+      {
+        "name": "id",
+        "type": "string"
+      },
+      {
+        "name": "placement",
+        "type": {
+          "name": "PlacementType",
+          "type": "enum",
+          "symbols": [
+            "FRONT_LEFT",
+            "FRONT_RIGHT",
+            "REAR_LEFT",
+            "REAR_RIGHT"
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>szp.rafael.rc</groupId>
+    <artifactId>rc-car-kafka-generator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <confluent.version>7.8.0</confluent.version>
+    </properties>
+
+    <dependencies>
+        <!-- Dependências do Kafka -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>7.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>0.10.5</version>
+        </dependency>
+
+
+        <!-- Dependência do Avro -->
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.12.0</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Plugin para Avro -->
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>1.12.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>src/main/avro</sourceDirectory>
+                            <outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
+                            <stringType>String</stringType>
+                            <includes>
+                                <include>Part.avsc</include>
+                                <include>**/*.avsc</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Plugin para Compilação -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.apache.avro</groupId>
+                            <artifactId>avro-compiler</artifactId>
+                            <version>1.12.0</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>${confluent.version}</version>
+                <configuration>
+                    <schemaRegistryUrls>
+                        <param>http://127.0.0.1:8081</param>
+                    </schemaRegistryUrls>
+                    <subjects>
+                        <szp.rafael.rccar.dto.Part>src/main/avro/Part.avsc</szp.rafael.rccar.dto.Part>
+                        <szp.rafael.rccar.dto.Body>src/main/avro/Body.avsc</szp.rafael.rccar.dto.Body>
+                        <szp.rafael.rccar.dto.Engine>src/main/avro/Engine.avsc</szp.rafael.rccar.dto.Engine>
+                        <szp.rafael.rccar.dto.RemoteControl>src/main/avro/RemoteControl.avsc</szp.rafael.rccar.dto.RemoteControl>
+                        <szp.rafael.rccar.dto.Wheel>src/main/avro/Wheel.avsc</szp.rafael.rccar.dto.Wheel>
+                    </subjects>
+                    <references>
+                        <szp.rafael.rccar.dto.Body>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.Part</name>
+                                <subject>szp.rafael.rccar.dto.Part</subject>
+                            </reference>
+                        </szp.rafael.rccar.dto.Body>
+                        <szp.rafael.rccar.dto.Engine>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.Part</name>
+                                <subject>szp.rafael.rccar.dto.Part</subject>
+                            </reference>
+                        </szp.rafael.rccar.dto.Engine>
+                        <szp.rafael.rccar.dto.RemoteControl>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.Part</name>
+                                <subject>szp.rafael.rccar.dto.Part</subject>
+                            </reference>
+                        </szp.rafael.rccar.dto.RemoteControl>
+                        <szp.rafael.rccar.dto.Wheel>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.Part</name>
+                                <subject>szp.rafael.rccar.dto.Part</subject>
+                            </reference>
+                        </szp.rafael.rccar.dto.Wheel>
+                    </references>
+                </configuration>
+                <goals>
+                    <goal>register</goal>
+                </goals>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

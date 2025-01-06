@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "Engine",
+  "namespace": "szp.rafael.rccar.dto",
+  "fields": [
+    {
+      "name": "part",
+      "type": "szp.rafael.rccar.dto.Part"
+    },
+    {
+      "name": "id",
+      "type": "string"
+    }
+  ]
+}

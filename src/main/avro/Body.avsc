@@ -1,0 +1,27 @@
+{
+  "type": "record",
+  "name": "Body",
+  "namespace": "szp.rafael.rccar.dto",
+  "fields": [
+    {
+      "name": "part",
+      "type": "szp.rafael.rccar.dto.Part"
+    },
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "color",
+      "type": "string"
+    },
+    {
+      "name": "material",
+      "type": "string"
+    },
+    {
+      "name": "weight",
+      "type": "float"
+    }
+  ]
+}
