@@ -21,7 +21,7 @@ public class EngineProducer extends PartProducer<Engine> {
     }
 
     public Engine create(String sku) {
-        var part = Part.newBuilder().setPartName("body").setSku(sku).build();
+        var part = Part.newBuilder().setPartName("engine").setSku(sku).build();
         var engine = Engine.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setPart(part)

@@ -23,7 +23,7 @@ public class RemoteControlProducer extends PartProducer<RemoteControl> {
     private Random random = new Random();
 
     public RemoteControl create(String sku) {
-        var part = Part.newBuilder().setPartName("body").setSku(sku).build();
+        var part = Part.newBuilder().setPartName("remote-control").setSku(sku).build();
         var body = RemoteControl.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setChannelFrequency(getChannelFrequency())
