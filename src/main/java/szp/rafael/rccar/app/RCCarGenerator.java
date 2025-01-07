@@ -37,30 +37,24 @@ public class RCCarGenerator {
         sendEngine(body, properties);
         sendRC(body, properties);
 
-        try {
-            Thread.sleep(6000);
-            sendBody(properties);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 
-    private static RemoteControl sendRC(Body body, Properties properties) {
+    public static RemoteControl sendRC(Body body, Properties properties) {
         RemoteControlProducer remoteControlProducer = new RemoteControlProducer(properties, "rccar-remote-control");
         var remoteControl = remoteControlProducer.create(body.getPart().getSku());
         remoteControlProducer.send(remoteControl);
         return remoteControl;
     }
 
-    private static Engine sendEngine(Body body, Properties properties) {
+    public static Engine sendEngine(Body body, Properties properties) {
         EngineProducer engineProducer = new EngineProducer(properties, "rccar-engine");
         Engine engine = engineProducer.create(body.getPart().getSku());
         engineProducer.send(engine);
         return engine;
     }
 
-    private static List<Wheel> sendWheels(Body body, Properties properties) {
+    public static List<Wheel> sendWheels(Body body, Properties properties) {
         WheelProducer wheelProducer = new WheelProducer(properties, "rccar-wheel");
         Wheel frontLeft = wheelProducer.create(body.getPart().getSku(), PlacementType.FRONT_LEFT);
         wheelProducer.send(frontLeft);
@@ -77,7 +71,7 @@ public class RCCarGenerator {
         return List.of(frontLeft, frontRight, rearLeft, rearRight);
     }
 
-    private static Body sendBody(Properties properties) {
+    public static Body sendBody(Properties properties) {
         BodyProducer bodyProducer = new BodyProducer(properties, "rccar-body");
         Body body = bodyProducer.create();
         bodyProducer.send(body);
