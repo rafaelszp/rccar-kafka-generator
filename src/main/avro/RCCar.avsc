@@ -9,22 +9,54 @@
     },
     {
       "name": "body",
-      "type": "szp.rafael.rccar.dto.Body"
+      "type": [
+        "null",
+        "szp.rafael.rccar.dto.Body"
+      ],
+      "default": null
     },
     {
       "name": "engine",
-      "type": "szp.rafael.rccar.dto.Engine"
+      "type": [
+        "null",
+        "szp.rafael.rccar.dto.Engine"
+      ],
+      "default": null
     },
     {
       "name": "remoteControl",
-      "type": "szp.rafael.rccar.dto.RemoteControl"
+      "type": [
+        "null",
+        "szp.rafael.rccar.dto.RemoteControl"
+      ],
+      "default": null
     },
     {
       "name": "wheels",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "szp.rafael.rccar.dto.Wheel"
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "situation",
       "type": {
-        "type": "array",
-        "items": "szp.rafael.rccar.dto.Wheel"
-      }
+        "name": "CarSituation",
+        "type": "enum",
+        "symbols": [
+          "COMPLETE",
+          "MISSING_BODY",
+          "MISSING_ENGINE",
+          "MISSING_REMOTE_CONTROL",
+          "MISSING_WHEELS",
+          "INCOMPLETE"
+        ]
+      },
+      "default": "INCOMPLETE"
     }
   ]
 }
