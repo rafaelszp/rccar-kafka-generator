@@ -36,6 +36,13 @@ public class RCCarGenerator {
         sendWheels(body, properties);
         sendEngine(body, properties);
         sendRC(body, properties);
+
+        try {
+            Thread.sleep(6000);
+            sendBody(properties);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
