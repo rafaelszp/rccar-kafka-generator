@@ -1,0 +1,30 @@
+{
+  "name": "RCCar",
+  "type": "record",
+  "namespace": "szp.rafael.rccar.dto",
+  "fields": [
+    {
+      "name": "sku",
+      "type": "string"
+    },
+    {
+      "name": "body",
+      "type": "szp.rafael.rccar.dto.Body"
+    },
+    {
+      "name": "engine",
+      "type": "szp.rafael.rccar.dto.Engine"
+    },
+    {
+      "name": "remoteControl",
+      "type": "szp.rafael.rccar.dto.RemoteControl"
+    },
+    {
+      "name": "wheels",
+      "type": {
+        "type": "array",
+        "items": "szp.rafael.rccar.dto.Wheel"
+      }
+    }
+  ]
+}

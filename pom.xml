@@ -100,6 +100,7 @@
                         <szp.rafael.rccar.dto.Engine>src/main/avro/Engine.avsc</szp.rafael.rccar.dto.Engine>
                         <szp.rafael.rccar.dto.RemoteControl>src/main/avro/RemoteControl.avsc</szp.rafael.rccar.dto.RemoteControl>
                         <szp.rafael.rccar.dto.Wheel>src/main/avro/Wheel.avsc</szp.rafael.rccar.dto.Wheel>
+                        <szp.rafael.rccar.dto.RCCar>src/main/avro/RCCar.avsc</szp.rafael.rccar.dto.RCCar>
                     </subjects>
                     <references>
                         <szp.rafael.rccar.dto.Body>
@@ -126,6 +127,28 @@
                                 <subject>szp.rafael.rccar.dto.Part</subject>
                             </reference>
                         </szp.rafael.rccar.dto.Wheel>
+                        <szp.rafael.rccar.dto.RCCar>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.Part</name>
+                                <subject>szp.rafael.rccar.dto.Part</subject>
+                            </reference>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.Body</name>
+                                <subject>szp.rafael.rccar.dto.Body</subject>
+                            </reference>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.Engine</name>
+                                <subject>szp.rafael.rccar.dto.Engine</subject>
+                            </reference>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.RemoteControl</name>
+                                <subject>szp.rafael.rccar.dto.RemoteControl</subject>
+                            </reference>
+                            <reference>
+                                <name>szp.rafael.rccar.dto.Wheel</name>
+                                <subject>szp.rafael.rccar.dto.Wheel</subject>
+                            </reference>
+                        </szp.rafael.rccar.dto.RCCar>
                     </references>
                 </configuration>
                 <goals>
