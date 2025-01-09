@@ -10,6 +10,11 @@
     {
       "name": "partName",
       "type": "string"
+    },
+    {
+      "name": "price",
+      "type": "double",
+      "default": 0.0
     }
   ]
 }

@@ -8,6 +8,11 @@
       "type": "string"
     },
     {
+      "name": "totalPrice",
+      "type": "double",
+        "default": 0.0
+    },
+    {
       "name": "body",
       "type": [
         "null",
