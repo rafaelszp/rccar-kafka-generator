@@ -59,7 +59,8 @@
           "MISSING_REMOTE_CONTROL",
           "MISSING_WHEELS",
           "INCOMPLETE",
-          "AWAITING_PRICE"
+          "AWAITING_PRICE",
+          "FAILED_GET_PRICE"
         ]
       },
       "default": "INCOMPLETE"
