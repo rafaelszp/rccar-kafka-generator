@@ -37,7 +37,7 @@ public abstract class PartProducer<T> {
 
     protected String getSKU(){
         Random random = new Random();
-        long id = random.nextLong(0, Long.MAX_VALUE);
+        long id = random.nextLong(Long.MAX_VALUE);
         return String.valueOf(id);
     }
 }

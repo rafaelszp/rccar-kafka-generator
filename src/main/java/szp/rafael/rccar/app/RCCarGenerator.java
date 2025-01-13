@@ -32,7 +32,7 @@ public class RCCarGenerator {
 
         properties.setProperty("schema.registry.url", "http://localhost:8081");
 
-        for(int i = 0; i < 5_000; i++) {
+        for(int i = 0; i < (5 * 1_000); i++) {
             Body body = sendBody(properties);
             sendEngine(body, properties);
             sendRC(body, properties);
