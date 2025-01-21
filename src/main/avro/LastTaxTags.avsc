@@ -1,0 +1,23 @@
+{
+  "name": "LastTaxTags",
+  "type": "record",
+  "namespace": "szp.rafael.rccar.dto",
+  "fields": [
+    {
+      "name": "stateName",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "taxTags",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": "szp.rafael.rccar.dto.TaxTag"
+        }
+      ],
+      "default": null
+    }
+  ]
+}
