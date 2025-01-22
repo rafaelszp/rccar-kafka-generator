@@ -11,10 +11,13 @@ import szp.rafael.rccar.dto.Body;
 import szp.rafael.rccar.dto.Engine;
 import szp.rafael.rccar.dto.PlacementType;
 import szp.rafael.rccar.dto.RemoteControl;
+import szp.rafael.rccar.dto.State;
+import szp.rafael.rccar.dto.TaxTag;
 import szp.rafael.rccar.dto.Wheel;
 import szp.rafael.rccar.producer.BodyProducer;
 import szp.rafael.rccar.producer.EngineProducer;
 import szp.rafael.rccar.producer.RemoteControlProducer;
+import szp.rafael.rccar.producer.TaxTagProducer;
 import szp.rafael.rccar.producer.WheelProducer;
 
 import java.util.Properties;
@@ -78,5 +81,12 @@ public class RCCarGenerator {
         Body body = bodyProducer.create();
         bodyProducer.send(body);
         return body;
+    }
+
+    public static TaxTag sendTaxTag(Properties properties, State state) {
+        TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag");
+        TaxTag taxTag = taxTagProducer.create(state);
+        taxTagProducer.send(taxTag);
+        return taxTag;
     }
 }

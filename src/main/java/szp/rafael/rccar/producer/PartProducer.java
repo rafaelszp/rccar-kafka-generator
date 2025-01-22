@@ -1,8 +1,12 @@
 package szp.rafael.rccar.producer;
 
+
 import io.vavr.Tuple2;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.Properties;
 import java.util.Random;
@@ -13,10 +17,13 @@ public abstract class PartProducer<T> {
     private String topic;
     protected Tuple2<String,T> event;
     protected Properties properties;
+    private final Logger logger;
+
 
     public PartProducer(Properties properties, String topic) {
         this.topic = topic;
         this.properties = properties;
+        this.logger = LoggerFactory.getLogger(this.getClass());
     }
 
     public abstract T create();
@@ -28,7 +35,7 @@ public abstract class PartProducer<T> {
             if (exception != null) {
                 exception.printStackTrace();
             } else {
-                System.out.println("Sent record: " + record);
+                logger.info("Sent record: {}", record);
             }
         });
         producer.flush();
@@ -40,4 +47,7 @@ public abstract class PartProducer<T> {
         long id = random.nextLong(Long.MAX_VALUE);
         return String.valueOf(id);
     }
+
+
+
 }

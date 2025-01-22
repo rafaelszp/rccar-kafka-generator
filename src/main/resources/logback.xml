@@ -1,0 +1,28 @@
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %logger{36} - %msg%n</pattern>
+            <withJansi>true</withJansi>
+        </encoder>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="CONSOLE" />
+        <queueSize>512</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <logger name="org.apache.kafka.clients.producer" level="OFF" />
+    <logger name="org.apache.kafka.commom" level="OFF" />
+    <logger name="org.apache.kafka.common.utils" level="OFF" />
+    <logger name="org.apache.kafka.common.metrics" level="OFF" />
+    <logger name="ch.qos.logback.classic" level="OFF" />
+    <logger name="ch.qos.logback.core" level="OFF" />
+    <logger name="ch.qos.logback.classic.util" level="OFF" />
+    <logger name="io.confluent.kafka.serializers" level="OFF" />
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
