@@ -6,6 +6,8 @@ import io.confluent.kafka.serializers.subject.RecordNameStrategy;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import szp.rafael.rccar.dto.State;
+import szp.rafael.rccar.dto.TaxTag;
+import szp.rafael.rccar.producer.TaxTagProducer;
 
 import java.util.Properties;
 
@@ -26,8 +28,14 @@ public class TagsGenerator {
 
             properties.setProperty("schema.registry.url", "http://localhost:8081");
 
-            for(int i = 0; i < (5  * 1); i++) {
+            for(int i = 0; i < (1  * 6); i++) {
                 sendTaxTag(properties, State.GO);
             }
+
+            for(int i = 0; i < (1  * 10); i++) {
+                sendTaxTag(properties, State.GO,i*10.0);
+            }
+
+            TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag");
         }
 }

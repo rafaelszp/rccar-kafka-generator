@@ -10,6 +10,7 @@ import java.util.Random;
 public class TaxTagProducer extends PartProducer<TaxTag>{
 
     private Random random;
+    private Double icms;
 
     public TaxTagProducer(Properties properties, String topic) {
         super(properties, topic);
@@ -30,7 +31,10 @@ public class TaxTagProducer extends PartProducer<TaxTag>{
     }
 
     private double getIcms() {
-        return random.nextDouble(0.09, 0.35);
+        if(icms == null) {
+            icms = random.nextDouble(0.09, 0.35);
+        }
+        return icms;
     }
 
 

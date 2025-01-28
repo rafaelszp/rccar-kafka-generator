@@ -89,4 +89,11 @@ public class RCCarGenerator {
         taxTagProducer.send(taxTag);
         return taxTag;
     }
+    public static TaxTag sendTaxTag(Properties properties, State state,double icms) {
+        TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag");
+        TaxTag taxTag = taxTagProducer.create(state);
+        taxTag.setIcms(icms);
+        taxTagProducer.send(taxTag);
+        return taxTag;
+    }
 }

@@ -48,6 +48,7 @@ public abstract class PartProducer<T> {
         return String.valueOf(id);
     }
 
-
-
+    public void setEvent(Tuple2<String, T> event) {
+        this.event = event;
+    }
 }
