@@ -1,6 +1,8 @@
 package szp.rafael.rccar.app;
 
 
+import com.github.javafaker.Faker;
+import com.github.javafaker.Superhero;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import io.confluent.kafka.serializers.subject.RecordNameStrategy;
@@ -35,32 +37,35 @@ public class RCCarGenerator {
 
         properties.setProperty("schema.registry.url", "http://localhost:8081");
 
+
         for(int i = 0; i < (5 * 1000); i++) {
-            Body body = sendBody(properties);
-            sendEngine(body, properties);
-            sendRC(body, properties);
-            sendWheels(body, properties);
+            Superhero superhero = new Faker().superhero();
+            String productName = superhero.descriptor()+" "+superhero.name();
+            Body body = sendBody(properties,productName);
+            sendEngine(body, properties,productName);
+            sendRC(body, properties,productName);
+            sendWheels(body, properties,productName);
         }
 
     }
 
 
-    public static RemoteControl sendRC(Body body, Properties properties) {
-        RemoteControlProducer remoteControlProducer = new RemoteControlProducer(properties, "rccar-remote-control");
+    public static RemoteControl sendRC(Body body, Properties properties,String productName) {
+        RemoteControlProducer remoteControlProducer = new RemoteControlProducer(properties, "rccar-remote-control",productName);
         var remoteControl = remoteControlProducer.create(body.getPart().getSku());
         remoteControlProducer.send(remoteControl);
         return remoteControl;
     }
 
-    public static Engine sendEngine(Body body, Properties properties) {
-        EngineProducer engineProducer = new EngineProducer(properties, "rccar-engine");
+    public static Engine sendEngine(Body body, Properties properties,String productName) {
+        EngineProducer engineProducer = new EngineProducer(properties, "rccar-engine",productName);
         Engine engine = engineProducer.create(body.getPart().getSku());
         engineProducer.send(engine);
         return engine;
     }
 
-    public static List<Wheel> sendWheels(Body body, Properties properties) {
-        WheelProducer wheelProducer = new WheelProducer(properties, "rccar-wheel");
+    public static List<Wheel> sendWheels(Body body, Properties properties,String productName) {
+        WheelProducer wheelProducer = new WheelProducer(properties, "rccar-wheel",productName);
         Wheel frontLeft = wheelProducer.create(body.getPart().getSku(), PlacementType.FRONT_LEFT);
         wheelProducer.send(frontLeft);
 
@@ -76,21 +81,21 @@ public class RCCarGenerator {
         return List.of(frontLeft, frontRight, rearLeft, rearRight);
     }
 
-    public static Body sendBody(Properties properties) {
-        BodyProducer bodyProducer = new BodyProducer(properties, "rccar-body");
+    public static Body sendBody(Properties properties,String productName) {
+        BodyProducer bodyProducer = new BodyProducer(properties, "rccar-body",productName);
         Body body = bodyProducer.create();
         bodyProducer.send(body);
         return body;
     }
 
     public static TaxTag sendTaxTag(Properties properties, State state) {
-        TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag");
+        TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag","");
         TaxTag taxTag = taxTagProducer.create(state);
         taxTagProducer.send(taxTag);
         return taxTag;
     }
     public static TaxTag sendTaxTag(Properties properties, State state,double icms) {
-        TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag");
+        TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag","");
         TaxTag taxTag = taxTagProducer.create(state);
         taxTag.setIcms(icms);
         taxTagProducer.send(taxTag);

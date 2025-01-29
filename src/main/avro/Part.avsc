@@ -15,6 +15,11 @@
       "name": "price",
       "type": "double",
       "default": 0.0
+    },
+    {
+      "name": "productName",
+      "type": "string",
+      "default": ""
     }
   ]
 }

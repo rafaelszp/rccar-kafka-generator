@@ -12,8 +12,8 @@ public class TaxTagProducer extends PartProducer<TaxTag>{
     private Random random;
     private Double icms;
 
-    public TaxTagProducer(Properties properties, String topic) {
-        super(properties, topic);
+    public TaxTagProducer(Properties properties, String topic,String state) {
+        super(properties, topic,state);
         random = new Random();
     }
 

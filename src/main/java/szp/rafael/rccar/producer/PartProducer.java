@@ -18,12 +18,14 @@ public abstract class PartProducer<T> {
     protected Tuple2<String,T> event;
     protected Properties properties;
     private final Logger logger;
+    protected String productName;
 
 
-    public PartProducer(Properties properties, String topic) {
+    public PartProducer(Properties properties, String topic, String productName) {
         this.topic = topic;
         this.properties = properties;
         this.logger = LoggerFactory.getLogger(this.getClass());
+        this.productName = productName;
     }
 
     public abstract T create();

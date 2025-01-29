@@ -26,7 +26,7 @@ public class WheelsGenerator {
 
         properties.setProperty("schema.registry.url", "http://localhost:8081");
 
-        sendWheels(sendBody(properties), properties);
+        sendWheels(sendBody(properties,""), properties,"");
 
     }
 

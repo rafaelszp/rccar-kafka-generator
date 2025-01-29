@@ -11,8 +11,8 @@ import java.util.UUID;
 
 public class EngineProducer extends PartProducer<Engine> {
 
-    public EngineProducer(Properties properties, String topic) {
-        super(properties, topic);
+    public EngineProducer(Properties properties, String topic, String productName) {
+        super(properties, topic, productName);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class EngineProducer extends PartProducer<Engine> {
     }
 
     public Engine create(String sku) {
-        var part = Part.newBuilder().setPartName("engine").setSku(sku).build();
+        var part = Part.newBuilder().setPartName("engine").setSku(sku).setProductName(productName).build();
         var engine = Engine.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setPart(part)

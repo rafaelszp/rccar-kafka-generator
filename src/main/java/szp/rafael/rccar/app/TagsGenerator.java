@@ -9,6 +9,7 @@ import szp.rafael.rccar.dto.State;
 import szp.rafael.rccar.dto.TaxTag;
 import szp.rafael.rccar.producer.TaxTagProducer;
 
+import java.util.Arrays;
 import java.util.Properties;
 
 import static szp.rafael.rccar.app.RCCarGenerator.sendTaxTag;
@@ -28,14 +29,26 @@ public class TagsGenerator {
 
             properties.setProperty("schema.registry.url", "http://localhost:8081");
 
-            for(int i = 0; i < (1  * 6); i++) {
-                sendTaxTag(properties, State.GO);
-            }
+//            for(int i = 0; i < (1  * 6); i++) {
+//                sendTaxTag(properties, State.GO);
+//            }
 
-            for(int i = 0; i < (1  * 10); i++) {
-                sendTaxTag(properties, State.GO,i*10.0);
-            }
+            Arrays.stream(State.values()).parallel().forEach(state -> {
+                for(int i = 0; i < (1  * 1); i++) {
+                    sendTaxTag(properties, state,i*10.0);
+                    sleep();
+                }
+            });
+//            for(int i = 0; i < (1  * 10); i++) {
+//                sendTaxTag(properties, State.GO,i*10.0);
+//            }
 
-            TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag");
+            TaxTagProducer taxTagProducer = new TaxTagProducer(properties, "rccar-taxtag","");
         }
+
+    private static void sleep() {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {}
+    }
 }

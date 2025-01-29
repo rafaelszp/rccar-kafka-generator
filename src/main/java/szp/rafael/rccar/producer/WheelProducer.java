@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class WheelProducer extends PartProducer<Wheel> {
 
-    public WheelProducer(Properties properties, String topic) {
-        super(properties, topic);
+    public WheelProducer(Properties properties, String topic, String productName) {
+        super(properties, topic, productName);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class WheelProducer extends PartProducer<Wheel> {
     }
 
     public Wheel create(String sku, PlacementType placement) {
-        var part = Part.newBuilder().setPartName("wheel").setSku(sku).build();
+        var part = Part.newBuilder().setPartName("wheel").setSku(sku).setProductName(productName).build();
         var wheel = Wheel.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setPlacement(placement)

@@ -26,7 +26,7 @@ public class RemoteControlGenerator {
 
         properties.setProperty("schema.registry.url", "http://localhost:8081");
 
-        sendRC(sendBody(properties), properties);
+        sendRC(sendBody(properties,""), properties,"");
 
     }
 

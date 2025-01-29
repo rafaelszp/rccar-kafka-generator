@@ -27,7 +27,7 @@ public class BodyGenerator {
 
         properties.setProperty("schema.registry.url", "http://localhost:8081");
 
-        Body body = sendBody(properties);
+        Body body = sendBody(properties,"");
 
     }
 

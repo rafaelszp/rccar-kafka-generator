@@ -11,8 +11,8 @@ import java.util.UUID;
 
 public class BodyProducer extends PartProducer<Body> {
 
-    public BodyProducer(Properties properties, String topic) {
-        super(properties, topic);
+    public BodyProducer(Properties properties, String topic, String productName) {
+        super(properties, topic,productName);
     }
 
     private List<String> colors = List.of("RED", "BLUE", "GREEN", "YELLOW", "BLACK", "WHITE", "ORANGE", "PURPLE", "PINK", "BROWN");
@@ -21,7 +21,7 @@ public class BodyProducer extends PartProducer<Body> {
 
     @Override
     public Body create() {
-        var part = Part.newBuilder().setPartName("body").setSku(getSKU()).build();
+        var part = Part.newBuilder().setPartName("body").setSku(getSKU()).setProductName(productName).build();
         var body = Body.newBuilder()
                 .setColor(getColor())
                 .setId(UUID.randomUUID().toString())

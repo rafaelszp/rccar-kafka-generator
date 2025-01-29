@@ -11,8 +11,8 @@ import java.util.UUID;
 
 public class RemoteControlProducer extends PartProducer<RemoteControl> {
 
-    public RemoteControlProducer(Properties properties, String topic) {
-        super(properties, topic);
+    public RemoteControlProducer(Properties properties, String topic, String productName) {
+        super(properties, topic, productName);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class RemoteControlProducer extends PartProducer<RemoteControl> {
     private Random random = new Random();
 
     public RemoteControl create(String sku) {
-        var part = Part.newBuilder().setPartName("remote-control").setSku(sku).build();
+        var part = Part.newBuilder().setPartName("remote-control").setSku(sku).setProductName(productName).build();
         var body = RemoteControl.newBuilder()
                 .setId(UUID.randomUUID().toString())
                 .setChannelFrequency(getChannelFrequency())
